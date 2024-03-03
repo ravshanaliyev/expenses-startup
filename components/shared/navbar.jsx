@@ -1,3 +1,4 @@
+"use client"
 import Image from 'next/image'
 import { ModeToggle } from './toggle-theme'
 import { Button } from '../ui/button'
@@ -5,14 +6,35 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { useForm } from 'react-hook-form'
+import { expenses } from '@/lib/data'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addData, setData } from '@/redux/slices/dataSlice'
 
 const Navbar = () => {
+    const [arr, setArr] = useState(expenses)
+    const dispatch = useDispatch()
+    dispatch(setData(arr))
+    console.log(arr);
+
+
+    const { register, handleSubmit, formState: { errors } } = useForm()
+    const submit = (data) => {
+        console.log(data)
+        const newData = {
+            ...data,
+            id: Math.random().toString(36).slice(2),
+            date: new Date().toISOString(),
+        }
+        const newArr = [...arr, newData]
+        setArr(newArr)
+    }
     return (
         <div className='flex justify-between max-w-[1200px] mx-auto my-6 items-center px-4'>
             <Image
@@ -36,17 +58,16 @@ const Navbar = () => {
                                 Fill in the form to create a new expense
                             </DialogDescription>
                         </DialogHeader>
-                        <div className="grid gap-4 py-4">
+                        <form onSubmit={handleSubmit(submit)} className="grid gap-4 py-4">
                             <div className=" gap-4">
-                                <Input id="name" placeholder="chingiz" className="col-span-3" />
+                                <Input {...register("name", { required: true })} id="name" placeholder="chingiz" className="col-span-3" />
                             </div>
                             <div className="gap-4">
-                                <Input type='number' id="money" placeholder="100000" className="col-span-3" />
+                                <Input {...register("amount", { required: true })} type='number' id="money" placeholder="100000" className="col-span-3" />
                             </div>
-                        </div>
-                        <DialogFooter>
                             <Button className='w-full' type="submit">Create an expense</Button>
-                        </DialogFooter>
+
+                        </form>
                     </DialogContent>
                 </Dialog>
             </div>

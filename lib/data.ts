@@ -35,6 +35,5 @@ export const expenses = [
     status: "tulanmagan",
     name: "Sam Smith",
     date: "2022-08-22",
-
   },
 ];

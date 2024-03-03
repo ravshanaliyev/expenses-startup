@@ -1,3 +1,4 @@
+"use client"
 import {
     Table,
     TableBody,
@@ -8,9 +9,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { expenses } from "@/lib/data"
-
+import { useSelector } from "react-redux"
 export function TableExpense() {
+    // dispatch(setData(expenses))
+    const data = useSelector(state => state.data.data)
+    console.log(data);
+
     return (
         <Table>
             <TableCaption>A list of your recent invoices.</TableCaption>
@@ -23,7 +27,7 @@ export function TableExpense() {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {expenses.map((invoice) => (
+                {data.map((invoice) => (
                     <TableRow key={invoice.id}>
                         <TableCell>{invoice.date}</TableCell>
                         <TableCell>{invoice.status}</TableCell>
