@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { ModeToggle } from './toggle-theme'
 
 const Navbar = () => {
     return (
@@ -12,7 +13,7 @@ const Navbar = () => {
                 priority
             />
             <div className="flex items-center gap-4">
-                <p>theme</p>
+                <ModeToggle />
                 <p>create</p>
             </div>
         </div>
