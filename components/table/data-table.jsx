@@ -11,9 +11,7 @@ import {
 } from "@/components/ui/table"
 import { useSelector } from "react-redux"
 export function TableExpense() {
-    // dispatch(setData(expenses))
     const data = useSelector(state => state.data.data)
-    console.log(data);
 
     return (
         <Table>

@@ -4,7 +4,9 @@ import { expenses } from "@/lib/data";
 const dataSlice = createSlice({
   name: "expenses",
   initialState: {
-    data: expenses,
+    data: localStorage.getItem("store")
+      ? JSON.parse(localStorage.getItem("store"))
+      : expenses,
   },
   reducers: {
     setData: (state, action) => {

@@ -21,12 +21,10 @@ const Navbar = () => {
     const [arr, setArr] = useState(expenses)
     const dispatch = useDispatch()
     dispatch(setData(arr))
-    console.log(arr);
 
 
     const { register, handleSubmit, formState: { errors } } = useForm()
     const submit = (data) => {
-        console.log(data)
         const newData = {
             ...data,
             id: Math.random().toString(36).slice(2),

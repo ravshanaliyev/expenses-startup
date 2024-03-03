@@ -6,3 +6,7 @@ export const store = configureStore({
     data: dataSlice,
   },
 });
+
+store.subscribe(() => {
+  localStorage.setItem("store", JSON.stringify(store.getState().data.data));
+});
